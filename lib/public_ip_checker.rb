@@ -4,9 +4,9 @@ class PublicIpChecker
 
   Urls = %w( http://checkip.amazonaws.com/ http://checkip.dyndns.org/ http://ifconfig.me/ip http://corz.org/ip )
 
-  def initialize limit=2,url=Urls
+  def initialize limit=2
     @limit         = limit
-    @urls          = url
+    @urls          = Urls
     @retrieved_ips = []
   end
 
@@ -36,7 +36,7 @@ private
       end
     }
 
-    print "Your public ip : #{@retrieved_ips.first}"
+    puts "Your public ip : #{@retrieved_ips.first}"
   end
 
   # retrieve ip address from response, removing html tag etc.
@@ -45,4 +45,9 @@ private
   rescue
     nil
   end
+end
+
+if __FILE__ == $0
+  p = PublicIpChecker.new
+  p.check
 end
